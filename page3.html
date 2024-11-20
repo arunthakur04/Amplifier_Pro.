@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Dashboard</title>
+    <style>
+        /* General styling */
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #2C3E50;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ECF0F1;
+        }
+
+        .container {
+            width: 1280px;
+            height: 420px;
+            display: flex;
+            background-color: #34495E;
+            border-radius: 15px;
+            color: white;
+            justify-content: space-between;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        .panel {
+            width: 240px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 10px;
+            padding: 10px;
+            background: linear-gradient(135deg, #2C3E50, #16A085);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .panel-right {
+            background: linear-gradient(135deg, #2C3E50, #8E44AD);
+        }
+
+        .panel-box {
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .center {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            gap: 10px;
+            overflow: hidden;
+        }
+
+        .gauge-container {
+            display: flex;
+            justify-content: space-evenly;
+            gap: 70px;
+            width: 100%;
+            margin-top: -15px;
+        }
+
+        .gauge {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(#1ABC9C 0deg, #F1C40F 60deg, #E74C3C 120deg, #F39C12 180deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .needle {
+            position: absolute;
+            width: 5px;
+            height: 40%;
+            background-color: #34495E;
+            border-radius: 2px 2px 0 0;
+            transform-origin: 50% 100%;
+            transform: rotate(0deg);
+            transition: transform 4s ease-in-out;
+            animation: rotateNeedle 4s infinite linear;
+            z-index: 5;
+            left: 50%;
+            top: 10%;
+            transform: translateX(-50%) rotate(0deg);
+        }
+
+        @keyframes rotateNeedle {
+            0% {
+                transform: translateX(-50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translateX(-50%) rotate(360deg);
+            }
+        }
+
+        .needle-cap {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #34495E;
+            border-radius: 50%;
+            z-index: 50;
+            left: 50%;
+            top: 45%;
+            transform: translateX(-50%);
+        }
+
+        .gauge-label {
+            position: absolute;
+            font-size: 12px;
+            color: white;
+            font-weight: bold;
+            bottom: -20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .gauge-text {
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            margin-top: 35px;
+        }
+
+        .gauge.temperature {
+            margin-right: 290px;
+        }
+
+        .volume-display-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: -40px;
+        }
+
+        .volume-display {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: conic-gradient(#1ABC9C 0% 81%, #ccc 81% 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .volume-inner-circle {
+            width: 82%;
+            height: 82%;
+            background-color: #ecf0f1;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            color: #34495E;
+            font-weight: bold;
+        }
+
+        .volume-label {
+            position: absolute;
+            font-size: 16px;
+            color: #34495E;
+            font-weight: bold;
+        }
+
+        .bottom-info {
+            text-align: center;
+            font-size: 16px;
+            color: #BDC3C7;
+            margin-top: 10px;
+        }
+
+        .back-button {
+            background-color: #E74C3C;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 20px;
+            /* Shifting the button slightly downward */
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #C0392B;
+        }
+
+        .music-icon {
+            font-size: 40px;
+            margin-top: 20px;
+            animation: pulse 2s infinite, rotateMusicIcon 4s linear infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes rotateMusicIcon {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left Panel -->
+        <div class="panel">
+            <div class="panel-box">
+                <p>TEMP CH A: 21°C</p>
+                <p>POWER OUT A: 500W</p>
+                <p>TEMP SMPS A: 25°C</p>
+                <p>STATUS: ACTIVE</p>
+                <div class="music-icon">🎶</div>
+                <p>TEMP CH B: 21°C</p>
+                <p>POWER OUT B: 500W</p>
+                <p>TEMP SMPS B: 25°C</p>
+                <p>STATUS: ACTIVE</p>
+            </div>
+        </div>
+
+        <!-- Center Section -->
+        <div class="center">
+            <div class="gauge-container">
+                <div class="gauge temperature">
+                    <div class="needle"></div>
+                    <div class="needle-cap"></div>
+                    <div class="gauge-label">Temperature</div>
+                    <p class="gauge-text">Current Temperature</p>
+                </div>
+                <div class="gauge gain">
+                    <div class="needle"></div>
+                    <div class="needle-cap"></div>
+                    <div class="gauge-label">Gain</div>
+                    <p class="gauge-text">Current Gain Level</p>
+                </div>
+            </div>
+
+            <!-- Circular Volume Display -->
+            <div class="volume-display-container">
+                <div class="volume-display">
+                    <div class="volume-inner-circle">81%</div>
+                </div>
+            </div>
+            <p class="volume-label">Volume</p>
+            <div class="bottom-info">
+                <p>AC INPUT: 220V &nbsp;&nbsp; ACTIVE CHANNEL: 4 &nbsp;&nbsp; FAULT: 0 &nbsp;&nbsp; INPUT MODE: SCREEN
+                </p>
+            </div>
+
+            <!-- Back Button -->
+            <a href="page2.html" class="back-button" id="back-page-button">Go Back</a>
+            <!-- <button class="back-button" onclick="window.history.back()">Go Back</button> -->
+        </div>
+
+        <!-- Right Panel -->
+        <div class="panel panel-right">
+            <div class="panel-box">
+                <p>TEMP CH A: 21°C</p>
+                <p>POWER OUT A: 500W</p>
+                <p>TEMP SMPS A: 25°C</p>
+                <p>STATUS: ACTIVE</p>
+                <div class="music-icon">🎶</div>
+                <p>TEMP CH B: 21°C</p>
+                <p>POWER OUT B: 500W</p>
+                <p>TEMP SMPS B: 25°C</p>
+                <p>STATUS: ACTIVE</p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
