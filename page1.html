@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Web Page Layout</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #2a2a2a;
+            color: #333;
+            overflow: hidden;
+            animation: fadeIn 2s ease-out;
+        }
+
+        /* Main container */
+        .container {
+            display: flex;
+            width: 1280px;
+            height: 420px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            animation: slideIn 1.5s ease-out forwards;
+        }
+
+        /* Slide-in animation */
+        @keyframes slideIn {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Side panels */
+        .panel {
+            width: 20%;
+            padding: 20px;
+            background: linear-gradient(135deg, #005f73, #0a9396);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border-radius: 12px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Panel content */
+        .output-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin: 5px 0;
+            border-radius: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* Center section */
+        .center-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        /* Search area */
+        .search-title {
+            font-size: 3rem;
+            color: #005f73;
+            margin-bottom: 15px;
+            font-weight: bold;
+            animation: fadeInText 1s ease-out forwards;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            margin-top: 10px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #0a9396;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+
+        .search-button {
+            background-color: #0a9396;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+        }
+
+        .platform-select {
+            margin-top: 15px;
+            padding: 10px;
+            font-size: 1rem;
+            border: 2px solid #0a9396;
+            border-radius: 5px;
+            width: 80%;
+        }
+
+        /* DJ Amplifier Animation */
+        .dj-amplifier {
+            display: flex;
+            justify-content: space-evenly;
+            width: 80%;
+            margin: 20px 0;
+            height: 50px;
+        }
+
+        .amplifier-bar {
+            width: 12px;
+            background-color: #e63946;
+            border-radius: 3px;
+            animation: amplify 0.6s ease-in-out infinite alternate;
+            transform-origin: bottom;
+        }
+
+        /* Dynamic amplifier animation with staggered delays */
+        .dj-amplifier .amplifier-bar:nth-child(1) {
+            animation-delay: 0.8s;
+            animation-duration: 0.6s;
+        }
+
+        .dj-amplifier .amplifier-bar:nth-child(2) {
+            animation-delay: 0.6s;
+            animation-duration: 0.7s;
+        }
+
+        .dj-amplifier .amplifier-bar:nth-child(3) {
+            animation-delay: 0.4s;
+            animation-duration: 0.8s;
+        }
+
+        .dj-amplifier .amplifier-bar:nth-child(4) {
+            animation-delay: 0.2s;
+            animation-duration: 0.7s;
+        }
+
+        .dj-amplifier .amplifier-bar:nth-child(5) {
+            animation-delay: 0s;
+            animation-duration: 0.6s;
+        }
+
+        /* Updated @keyframes for bottom-to-top animation */
+        @keyframes amplify {
+            0% {
+                height: 20px;
+                background-color: #e63946;
+            }
+
+            50% {
+                height: 40px;
+                background-color: #f4a261;
+            }
+
+            100% {
+                height: 60px;
+                background-color: #2a9d8f;
+            }
+        }
+
+        /* Next Page Button */
+        .next-page-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            background-color: #0a9396;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .next-page-button:hover {
+            background-color: #007b83;
+        }
+
+        /* Labels Section */
+        .labels-section {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+            font-size: 1.1rem;
+            color: #333;
+            text-align: center;
+            justify-content: center;
+        }
+
+        .label-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .label-item strong {
+            font-weight: bold;
+            color: #005f73;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Left panel -->
+        <div class="panel">
+            <div class="output-box">
+                <p>TEMP CH A: 21°C</p>
+                <p>TEMP. SMPS: 22°C</p>
+                <p>POWER OUT A: 500W</p>
+                <p>STATUS: ACTIVE</p>
+            </div>
+            <div class="dj-amplifier">
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+            </div>
+            <div class="output-box">
+                <p>TEMP CH B: 21°C</p>
+                <p>TEMP. SMPS: 22°C</p>
+                <p>POWER OUT B: 500W</p>
+                <p>STATUS: ACTIVE</p>
+            </div>
+        </div>
+
+        <!-- Center section -->
+        <div class="center-section">
+            <h1 class="search-title">Search for Songs</h1>
+            <div class="search-bar">
+                <input id="searchInput" class="search-input" type="text" placeholder="Enter song name">
+                <button class="search-button" onclick="searchSong()">Search</button>
+            </div>
+            <select id="platformSelect" class="platform-select">
+                <option value="youtube">YouTube</option>
+                <option value="spotify">Spotify</option>
+            </select>
+
+            <!-- Next Page Button -->
+            <button class="next-page-button" onclick="goToNextPage()">Next Page</button>
+
+            <!-- Labels Section -->
+            <div class="labels-section">
+                <div class="label-item">
+                    <strong>AC Input:</strong> 220V
+                </div>
+                <div class="label-item">
+                    <strong>Active Channel:</strong> 4
+                </div>
+                <div class="label-item">
+                    <strong>Fault:</strong> 0
+                </div>
+                <div class="label-item">
+                    <strong>Input Mode:</strong> Screen
+                </div>
+            </div>
+        </div>
+
+        <!-- Right panel -->
+        <div class="panel">
+            <div class="output-box">
+                <p>TEMP CH D: 21°C</p>
+                <p>TEMP. SMPS: 22°C</p>
+                <p>POWER OUT D: 500W</p>
+                <p>STATUS: ACTIVE</p>
+            </div>
+            <div class="dj-amplifier">
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+                <div class="amplifier-bar"></div>
+            </div>
+            <div class="output-box">
+                <p>TEMP CH C: 21°C</p>
+                <p>TEMP. SMPS: 22°C</p>
+                <p>POWER OUT C: 500W</p>
+                <p>STATUS: ACTIVE</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function searchSong() {
+            const query = document.getElementById('searchInput').value;
+            const platform = document.getElementById('platformSelect').value;
+            let url = '';
+
+            if (platform === 'youtube') {
+                url = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+            } else if (platform === 'spotify') {
+                url = `https://open.spotify.com/search/${encodeURIComponent(query)}`;
+            }
+
+            if (query) {
+                window.open(url, '_blank');
+            } else {
+                alert("Please enter a search term.");
+            }
+        }
+
+        function goToNextPage() {
+            window.location.href = "page2.html"; // Replace with the actual next page URL
+        }
+    </script>
+</body>
+
+</html>
